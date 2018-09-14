@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "contacts")
 @Data
 @NoArgsConstructor
 public class Contact {
@@ -15,6 +17,6 @@ public class Contact {
     @Id
     @GeneratedValue
     private Integer id;
-    
+
     private String name;
 }
