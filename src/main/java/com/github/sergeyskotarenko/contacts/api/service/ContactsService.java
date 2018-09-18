@@ -1,9 +1,9 @@
 package com.github.sergeyskotarenko.contacts.api.service;
 
-import com.github.sergeyskotarenko.contacts.api.dto.ContactsDto;
+import com.github.sergeyskotarenko.contacts.api.dto.ContactsResponseDto;
 
 public interface ContactsService {
 
-    ContactsDto findContacts(String filter);
+    ContactsResponseDto findContactsByFilter(String filter, Integer limit, Integer afterId);
 
 }

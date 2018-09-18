@@ -5,6 +5,7 @@ import com.github.sergeyskotarenko.contacts.api.dto.ContactDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.QueryHint;
@@ -16,7 +17,8 @@ import static org.hibernate.jpa.QueryHints.HINT_FETCH_SIZE;
 public interface ContactsRepository extends JpaRepository<Contact, Integer> {
 
     @QueryHints(value = @QueryHint(name = HINT_FETCH_SIZE, value = "50"))
-    @Query("select new com.github.sergeyskotarenko.contacts.api.dto.ContactDto(c.id, c.name) from Contact c")
-    Stream<ContactDto> findAllContacts();
+    @Query("select new com.github.sergeyskotarenko.contacts.api.dto.ContactDto(c.id, c.name) " +
+            "from Contact c where c.id > :afterId order by c.id")
+    Stream<ContactDto> findAllContactsAfterId(@Param("afterId") Integer afterId);
 
 }

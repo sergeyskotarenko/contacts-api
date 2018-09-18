@@ -1,6 +1,6 @@
 package com.github.sergeyskotarenko.contacts.api.controller;
 
-import com.github.sergeyskotarenko.contacts.api.dto.ContactsDto;
+import com.github.sergeyskotarenko.contacts.api.dto.ContactsResponseDto;
 import com.github.sergeyskotarenko.contacts.api.service.ContactsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +18,11 @@ public class ContactsController {
     }
 
     @GetMapping("contacts")
-    public ContactsDto contacts(@RequestParam("nameFilter") String filter) {
-        return contactsService.findContacts(filter);
+    public ContactsResponseDto getContactsByFilter(
+            @RequestParam(value = "nameFilter") String filter,
+            @RequestParam(value = "limit", required = false, defaultValue = "50") Integer limit,
+            @RequestParam(value = "afterId", required = false, defaultValue = "0") Integer afterId) {
+        return contactsService.findContactsByFilter(filter, limit, afterId);
     }
 
 }
