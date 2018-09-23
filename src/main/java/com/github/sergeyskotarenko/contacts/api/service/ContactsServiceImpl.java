@@ -31,7 +31,7 @@ public class ContactsServiceImpl implements ContactsService {
                 .filter(dto -> !pattern.matcher(dto.getName()).matches())
                 .limit(limit)
                 .collect(Collectors.toList());
-        int lastId = contactDtos.isEmpty() ? 0 : contactDtos.get(contactDtos.size() - 1).getId();
+        int lastId = contactDtos.isEmpty() ? -1 : contactDtos.get(contactDtos.size() - 1).getId();
         return ContactsResponseDto.builder()
                 .contacts(contactDtos)
                 .lastId(lastId)
